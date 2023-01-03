@@ -1,13 +1,22 @@
 <template>
-  <div class="home">
-      Home
-  </div>
+
+  <ToggleButton />
+
 </template>
 
 <script>
+import ToggleButton from '../components/ToggleButton.vue'
+
 export default {
-  name: 'HomeView',
+  name: 'App',
+
   components: {
-  }
+    ToggleButton
+  },
+
 }
 </script>
+
+<style>
+
+</style>
