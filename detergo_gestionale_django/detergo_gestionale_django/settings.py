@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
+    
+    'detergo_gestionale_app'
 ]
 
 CORS_ALLOWED_ORIGINS = [
