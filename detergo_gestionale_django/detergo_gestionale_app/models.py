@@ -67,30 +67,6 @@ class Articolo(models.Model):
         verbose_name_plural = "Articoli"
 
 
-class CapoPortato(models.Model):
-    stato = [
-        ('NO', 'non_iniziato'),
-        ('PA', 'pariziale'),
-        ('CO', 'completato')
-    ]
-    stato = models.CharField(max_length=2, choices=stato)
-    prezzo_modificato = models.FloatField(null=True)
-    foto = models.CharField(max_length=256, null=True)
-    id_ordine = models.ForeignKey(
-        Ordine, on_delete=models.CASCADE, related_name='get_ordine')
-    id_articolo = models.ForeignKey(
-        Articolo, on_delete=models.CASCADE, related_name='get_articolo')
-    colore = models.ManyToManyField(Colore)
-    difetto = models.ManyToManyField(Difetto)
-
-    def __str__(self):
-        return self.id_ordine + " " + self.id_articolo
-
-    class Meta:
-        verbose_name = "CapoPortato"
-        verbose_name_plural = "CapiPortati"
-
-
 class Colore(models.Model):
     nome = models.CharField(max_length=64)
     icona = models.CharField(max_length=256)
@@ -113,4 +89,27 @@ class Difetto(models.Model):
     class Meta:
         verbose_name = "Difetto"
         verbose_name_plural = "Difetti"
+        
 
+class CapoPortato(models.Model):
+    stato = [
+        ('NO', 'non_iniziato'),
+        ('PA', 'pariziale'),
+        ('CO', 'completato')
+    ]
+    stato = models.CharField(max_length=2, choices=stato)
+    prezzo_modificato = models.FloatField(null=True)
+    foto = models.CharField(max_length=256, null=True)
+    id_ordine = models.ForeignKey(
+        Ordine, on_delete=models.CASCADE, related_name='get_ordine')
+    id_articolo = models.ForeignKey(
+        Articolo, on_delete=models.CASCADE, related_name='get_articolo')
+    colore = models.ManyToManyField(Colore)
+    difetto = models.ManyToManyField(Difetto)
+
+    def __str__(self):
+        return self.id_ordine + " " + self.id_articolo
+
+    class Meta:
+        verbose_name = "CapoPortato"
+        verbose_name_plural = "CapiPortati"
