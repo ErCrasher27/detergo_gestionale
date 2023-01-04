@@ -10,8 +10,6 @@
 
 <template>
 
-
-
     <div class="toggle-container">
 
         <div>
@@ -27,8 +25,6 @@
         </div>
 
     </div>
-
-
 
 </template>
 
