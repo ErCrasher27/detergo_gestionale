@@ -1,6 +1,6 @@
 <template>
 
-  <ToggleButton />
+  <ToggleButton defaultValue="accettazione"/>
 
 </template>
 
