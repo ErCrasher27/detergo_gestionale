@@ -92,7 +92,18 @@ input[type="radio"].toggle+label {
     cursor: pointer;
 }
 
-input[type="radio"].toggle+label:hover {}
+/* hover da stabilire (start region)*/
+
+input[type="radio"].toggle+label:hover {
+}
+
+input[type="radio"].toggle.toggle-accettazione+label:hover {
+}
+
+input[type="radio"].toggle.toggle-restituzione+label:hover {
+}
+
+/* hover da stabilire (end region)*/
 
 input[type="radio"].toggle:checked+label {
     cursor: default;
