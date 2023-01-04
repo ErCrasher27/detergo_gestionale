@@ -1,31 +1,24 @@
 <!-- ToggleButton Component
-    Accetta un parametro (defaultValue) per la selezione del pulsante, che può avere i seguenti valori: 
-        "accettazione" 
-        "restituzione"    
-    se passi un parametro diverso da quelli indicati, non avrà alcun click 
-    e assumerà il valore del valore passato (che non sarà trattato)
-
-    value: {{ checkedValue }}
+    Accepts a parameter (defaultValue) for button selection, which can have the following values:
+        "acceptance"
+        "return"
+    if you pass a parameter other than those indicated, it will not have any clicks
+    and will assume the value of the passed value (which will not be treated)
 -->
 
 <template>
-
     <div class="toggle-container">
-
         <div>
-            <input type="radio" name="toggle" id="toggle-accettazione" class="toggle toggle-accettazione"
-                value="accettazione" v-model="checkedValue">
-            <label for="toggle-accettazione" class="btn">ACCETTAZIONE</label>
+            <input type="radio" name="toggle" id="toggle-acceptance" class="toggle toggle-acceptance" value="acceptance"
+                v-model="checkedValue">
+            <label for="toggle-acceptance" class="btn">ACCETTAZIONE</label>
         </div>
-
         <div>
-            <input type="radio" name="toggle" id="toggle-restituzione" class="toggle toggle-restituzione"
-                value="restituzione" v-model="checkedValue">
-            <label for="toggle-restituzione" class="btn">RESTITUZIONE</label>
+            <input type="radio" name="toggle" id="toggle-return" class="toggle toggle-return" value="return"
+                v-model="checkedValue">
+            <label for="toggle-return" class="btn">RESTITUZIONE</label>
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -34,7 +27,7 @@ export default {
     props: {
         operation: {
             type: String,
-            default: "accettazione"
+            default: "acceptance"
         }
     },
 
@@ -91,25 +84,6 @@ input[type="radio"].toggle+label {
     cursor: pointer;
 }
 
-/* hover da stabilire (start region)*/
-
-input[type="radio"].toggle:not(:checked)+label:hover {
-    background: #00497e69;
-    color: #ffffff;
-}
-
-input[type="radio"].toggle.toggle-accettazione:not(:checked)+label:hover {
-    border-top-right-radius: 0%;
-    border-bottom-right-radius: 0%;
-}
-
-input[type="radio"].toggle.toggle-restituzione:not(:checked)+label:hover {
-    border-top-left-radius: 0%;
-    border-bottom-left-radius: 0%;  
-}
-
-/* hover da stabilire (end region)*/
-
 input[type="radio"].toggle:checked+label {
     cursor: default;
     color: #ffffff;
@@ -117,7 +91,7 @@ input[type="radio"].toggle:checked+label {
     border-bottom: 2px solid #004A7E;
 }
 
-input[type="radio"].toggle.toggle-accettazione:checked+label::before {
+input[type="radio"].toggle.toggle-acceptance:checked+label::before {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: x-large;
@@ -125,7 +99,7 @@ input[type="radio"].toggle.toggle-accettazione:checked+label::before {
     margin-right: 8px;
 }
 
-input[type="radio"].toggle.toggle-restituzione:checked+label::after {
+input[type="radio"].toggle.toggle-return:checked+label::after {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: x-large;

@@ -19,14 +19,14 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <button class="button">
-                <span class="icon is-small">
+              <button class="button is-medium">
+                <span class="icon">
                   <i class="fa-solid fa-gear"></i>
                 </span>
               </button>
 
-              <button class="button">
-                <span class="icon is-small">
+              <button class="button is-medium">
+                <span class="icon">
                   <i class="fa-solid fa-right-from-bracket"></i>
                 </span>
               </button>
@@ -76,11 +76,15 @@ export default {
   max-height: none;
 }
 
-.navbar .navbar-end .navbar-item .buttons .button {
+.navbar .navbar-end .navbar-item .buttons .button.is-medium {
   background: #005C9D;
 }
 
-.navbar .navbar-menu .navbar-end .navbar-item .buttons .button .icon.is-small i {
+.navbar .navbar-menu .navbar-end .navbar-item .buttons .button.is-medium .icon i {
   color: #FFFFFF;
+}
+
+#wrapper .section {
+  background: #004A7E;
 }
 </style>
