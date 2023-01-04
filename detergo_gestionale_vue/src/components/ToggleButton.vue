@@ -4,9 +4,13 @@
         "restituzione"    
     se passi un parametro diverso da quelli indicati, non avrà alcun click 
     e assumerà il valore del valore passato (che non sarà trattato)
+
+    value: {{ checkedValue }}
 -->
 
 <template>
+
+
 
     <div class="toggle-container">
 
@@ -24,7 +28,6 @@
 
     </div>
 
-    <span>value: {{ checkedValue }}</span>
 
 
 </template>
@@ -94,14 +97,11 @@ input[type="radio"].toggle+label {
 
 /* hover da stabilire (start region)*/
 
-input[type="radio"].toggle+label:hover {
-}
+input[type="radio"].toggle+label:hover {}
 
-input[type="radio"].toggle.toggle-accettazione+label:hover {
-}
+input[type="radio"].toggle.toggle-accettazione+label:hover {}
 
-input[type="radio"].toggle.toggle-restituzione+label:hover {
-}
+input[type="radio"].toggle.toggle-restituzione+label:hover {}
 
 /* hover da stabilire (end region)*/
 

@@ -1,44 +1,80 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar is-dark">
-
+    <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item">
-          <strong>Detergo Gestionale</strong>
+        <router-link to="/home" class="navbar-item">
+          <a class="navbar-item">
+            <img src="./assets/logo-detergo-png.png" width="112" height="28">
+          </a>
         </router-link>
-        <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu"
-          @click="showMobileMenu = !showMobileMenu">
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div class="navbar-menu" id="navbar-menu" v-bind:class="{ 'is-active': showMobileMenu }">
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Home
+          </a>
+
+          <a class="navbar-item">
+            Documentation
+          </a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                About
+              </a>
+              <a class="navbar-item">
+                Jobs
+              </a>
+              <a class="navbar-item">
+                Contact
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div class="navbar-end">
-          <router-link to="/summer" class="navbar-item">Summer</router-link>
-          <router-link to="/winter" class="navbar-item">Winter</router-link>
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="navbar-item">
-        <div class="buttons">
-          <router-link to="/login" class="button is-light">Login</router-link>
-          <router-link to="/cart" class="button is-success">
-            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-            <span>cart</span>
-          </router-link>
-        </div>
-      </div>
-
     </nav>
-
+    
     <section class="section">
       <router-view />
     </section>
 
     <footer class="footer">
-      <p class="has-text-centered">Copyright (c) 2023</p>
+      <div class="content has-text-centered">
+        <p>
+          <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        </p>
+      </div>
     </footer>
 
   </div>
@@ -56,9 +92,14 @@ export default {
 
 <style lang="scss">
 @import '../node_modules/bulma';
+
 @font-face {
   font-family: "Gunterz";
   src: local("Gunterz"),
-   url(./fonts/Fontspring-DEMO-gunterz-medium.otf) format("truetype");
+    url(./fonts/Fontspring-DEMO-gunterz-medium.otf) format("truetype");
+}
+
+.navbar-item img {
+  max-height: none;
 }
 </style>

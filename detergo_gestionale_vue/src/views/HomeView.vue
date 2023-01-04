@@ -1,6 +1,8 @@
 <template>
 
+<div class = "is-flex	is-justify-content-center	">
   <ToggleButton/>
+</div>
 
 </template>
 
