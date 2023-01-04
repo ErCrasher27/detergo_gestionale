@@ -56,4 +56,9 @@ export default {
 
 <style lang="scss">
 @import '../node_modules/bulma';
+@font-face {
+  font-family: "Gunterz";
+  src: local("Gunterz"),
+   url(./fonts/Fontspring-DEMO-gunterz-medium.otf) format("truetype");
+}
 </style>
