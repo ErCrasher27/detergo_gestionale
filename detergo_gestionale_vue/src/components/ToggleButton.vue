@@ -33,7 +33,7 @@
 export default {
 
     props: {
-        defaultValue: {
+        operation: {
             type: String,
             default: "accettazione"
         }
@@ -41,11 +41,11 @@ export default {
 
     data() {
         return {
-            currentState: this.defaultValue
+            currentState: this.operation
         }
     },
 
-    computed : {
+    computed: {
         checkedValue: {
             get() {
                 return this.currentState;
