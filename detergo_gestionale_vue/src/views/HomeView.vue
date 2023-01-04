@@ -1,7 +1,7 @@
 <template>
 
 <div class = "is-flex	is-justify-content-center	">
-  <ToggleButton/>
+  <ToggleButton operation="accettazione"/>
 </div>
 
 </template>

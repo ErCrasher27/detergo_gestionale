@@ -93,11 +93,20 @@ input[type="radio"].toggle+label {
 
 /* hover da stabilire (start region)*/
 
-input[type="radio"].toggle+label:hover {}
+input[type="radio"].toggle:not(:checked)+label:hover {
+    background: #00497e69;
+    color: #ffffff;
+}
 
-input[type="radio"].toggle.toggle-accettazione+label:hover {}
+input[type="radio"].toggle.toggle-accettazione:not(:checked)+label:hover {
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
 
-input[type="radio"].toggle.toggle-restituzione+label:hover {}
+input[type="radio"].toggle.toggle-restituzione:not(:checked)+label:hover {
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 0%;  
+}
 
 /* hover da stabilire (end region)*/
 

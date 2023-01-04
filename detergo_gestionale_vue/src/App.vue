@@ -4,7 +4,7 @@
       <div class="navbar-brand">
         <router-link to="/home" class="navbar-item">
           <a class="navbar-item">
-            <img src="./assets/logo-detergo-png.png" width="112" height="28">
+            <img src="./assets/logo-detergo-svg.svg" width="117" height="67">
           </a>
         </router-link>
 
@@ -16,47 +16,20 @@
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item">
-            Home
-          </a>
-
-          <a class="navbar-item">
-            Documentation
-          </a>
-
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              More
-            </a>
-
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                About
-              </a>
-              <a class="navbar-item">
-                Jobs
-              </a>
-              <a class="navbar-item">
-                Contact
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                Report an issue
-              </a>
-            </div>
-          </div>
-        </div>
-
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light">
-                Log in
-              </a>
+              <button class="button">
+                <span class="icon is-small">
+                  <i class="fa-solid fa-gear"></i>
+                </span>
+              </button>
+
+              <button class="button">
+                <span class="icon is-small">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                </span>
+              </button>
             </div>
           </div>
         </div>
@@ -99,7 +72,15 @@ export default {
     url(./fonts/Fontspring-DEMO-gunterz-medium.otf) format("truetype");
 }
 
-.navbar-item img {
+.navbar .navbar-brand .navbar-item img {
   max-height: none;
+}
+
+.navbar .navbar-end .navbar-item .buttons .button {
+  background: #005C9D;
+}
+
+.navbar .navbar-menu .navbar-end .navbar-item .buttons .button .icon.is-small i {
+  color: #FFFFFF;
 }
 </style>
