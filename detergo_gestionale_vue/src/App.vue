@@ -1,36 +1,39 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar is-dark">
-
+    <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item">
-          <strong>Detergo Gestionale</strong>
+        <router-link to="/home" class="navbar-item">
+          <a class="navbar-item">
+            <img src="./assets/logo-detergo-svg.svg" width="117" height="67">
+          </a>
         </router-link>
-        <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu"
-          @click="showMobileMenu = !showMobileMenu">
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div class="navbar-menu" id="navbar-menu" v-bind:class="{ 'is-active': showMobileMenu }">
+      <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-end">
-          <router-link to="/summer" class="navbar-item">Summer</router-link>
-          <router-link to="/winter" class="navbar-item">Winter</router-link>
+          <div class="navbar-item">
+            <div class="buttons">
+              <button class="button is-medium">
+                <span class="icon">
+                  <i class="fa-solid fa-gear"></i>
+                </span>
+              </button>
+
+              <button class="button is-medium">
+                <span class="icon">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="navbar-item">
-        <div class="buttons">
-          <router-link to="/login" class="button is-light">Login</router-link>
-          <router-link to="/cart" class="button is-success">
-            <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-            <span>cart</span>
-          </router-link>
-        </div>
-      </div>
-
     </nav>
 
     <section class="section">
@@ -38,7 +41,13 @@
     </section>
 
     <footer class="footer">
-      <p class="has-text-centered">Copyright (c) 2023</p>
+      <div class="content has-text-centered">
+        <p>
+          <strong>Detergo Gestionale</strong> by <a href="">mini dev team</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        </p>
+      </div>
     </footer>
 
   </div>
@@ -56,9 +65,26 @@ export default {
 
 <style lang="scss">
 @import '../node_modules/bulma';
+
 @font-face {
   font-family: "Gunterz";
   src: local("Gunterz"),
-   url(./fonts/Fontspring-DEMO-gunterz-medium.otf) format("truetype");
+    url(./fonts/Fontspring-DEMO-gunterz-medium.otf) format("truetype");
+}
+
+.navbar .navbar-brand .navbar-item img {
+  max-height: none;
+}
+
+.navbar .navbar-end .navbar-item .buttons .button.is-medium {
+  background: #005C9D;
+}
+
+.navbar .navbar-menu .navbar-end .navbar-item .buttons .button.is-medium .icon i {
+  color: #FFFFFF;
+}
+
+#wrapper .section {
+  background: #004A7E;
 }
 </style>
