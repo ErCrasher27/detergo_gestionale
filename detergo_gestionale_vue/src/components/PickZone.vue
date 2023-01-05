@@ -30,8 +30,44 @@
             </ul>
         </div>
     </div>
-    
-    <div class="column is-3" v-for="cliente in clienti">
 
+    <div>
+        {{ categorie }}
     </div>
+
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+    name: 'Home',
+
+    data() {
+        return {
+            categorie: []
+        }
+    },
+
+    components: {
+    },
+
+    mounted() {
+        this.getCategorie()
+    },
+
+    methods: {
+        getCategorie() {
+            axios
+                .get('/api/v1/categorie/')
+                .then(response => {
+                    console.log(response)
+                    this.categorie = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+    }
+}
+</script>
