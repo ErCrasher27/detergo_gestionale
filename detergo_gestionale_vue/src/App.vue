@@ -54,13 +54,6 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      showMobileMenu: false,
-    }
-  }
-}
 </script>
 
 <style lang="scss">

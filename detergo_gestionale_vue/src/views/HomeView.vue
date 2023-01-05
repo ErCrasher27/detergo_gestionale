@@ -6,7 +6,7 @@
 
 
   <div class="block is-flex	is-justify-content-center	">
-    <ToggleButton />
+    <ToggleButton/>
   </div>
 
 </template>

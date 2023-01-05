@@ -19,6 +19,10 @@
             <label for="toggle-return" class="btn">RESTITUZIONE</label>
         </div>
     </div>
+
+    <div>
+        {{ currentState }}
+    </div>
 </template>
 
 <script>
