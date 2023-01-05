@@ -30,4 +30,8 @@
             </ul>
         </div>
     </div>
+    
+    <div class="column is-3" v-for="cliente in clienti">
+
+    </div>
 </template>
