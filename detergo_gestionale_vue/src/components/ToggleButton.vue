@@ -13,7 +13,7 @@
         <div>
             <input type="radio" name="toggle" id="toggle-accettazione" class="toggle toggle-accettazione"
                 value="accettazione" v-model="checkedValue">
-            <label for="toggle-accettazione" class="btn">ACCETTAZIONE</label>
+            <label for="toggle-accettazione" class="btn">ACCETTAZION</label>
         </div>
 
         <div>
