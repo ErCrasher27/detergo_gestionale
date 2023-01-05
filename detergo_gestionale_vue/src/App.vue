@@ -78,6 +78,6 @@
 }
 
 #wrapper .section {
-  background: #004A7E;
+  background: #619eca;
 }
 </style>

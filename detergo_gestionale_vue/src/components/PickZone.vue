@@ -1,48 +1,39 @@
 <!-- tabs in alto, dentro delle card... per quanto riguarda lo scontrino -> table -->
 <template>
-    <div class="block">
-        <div class="tabs is-toggle is-fullwidth is-large">
-            <ul>
-                <li class="is-active">
-                    <a>
-                        <span class="icon"><i class="fas fa-image" aria-hidden="true"></i></span>
-                        <span>Appendibili</span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon"><i class="fas fa-music" aria-hidden="true"></i></span>
-                        <span>Non Appendibili</span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon"><i class="fas fa-film" aria-hidden="true"></i></span>
-                        <span>Fabrizie</span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span class="icon"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-                        <span>Varie</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <div class="tabs is-centered is-boxed is-medium">
+        <ul>
+            <li>
+                <a>
+                    <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+                    <span>Pictures</span>
+                </a>
+            </li>
+            <li class="is-active">
+                <a>
+                    <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+                    <span>Music</span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+                    <span>Videos</span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+                    <span>Documents</span>
+                </a>
+            </li>
+        </ul>
     </div>
-
-    <div>
-        {{ categorie }}
-    </div>
-
 </template>
 
 <script>
 import axios from 'axios'
 
 export default {
-    name: 'Home',
-
     data() {
         return {
             categorie: []
@@ -61,7 +52,6 @@ export default {
             axios
                 .get('/api/v1/categorie/')
                 .then(response => {
-                    console.log(response)
                     this.categorie = response.data
                 })
                 .catch(error => {

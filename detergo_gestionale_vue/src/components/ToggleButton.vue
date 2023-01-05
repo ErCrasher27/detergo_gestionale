@@ -27,7 +27,6 @@
 
 <script>
 export default {
-
     props: {
         operation: {
             type: String,
