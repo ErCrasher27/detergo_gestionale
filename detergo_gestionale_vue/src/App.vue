@@ -4,7 +4,7 @@
       <div class="navbar-brand">
         <router-link to="/home" class="navbar-item">
           <a class="navbar-item">
-            <img src="./assets/logo-detergo-svg.svg" width="117" height="67">
+            <img src="./assets/logo_detergo.svg" width="117" height="67">
           </a>
         </router-link>
 

@@ -1,31 +1,16 @@
 <template>
-
-  <div>
-    <PickZone></PickZone>
-  </div>
-
-
-  <div class="block is-flex	is-justify-content-center	">
-    <ToggleButton/>
-  </div>
-
+  <Tab></Tab>
+  <MainSwitch></MainSwitch>
 </template>
 
 <script>
-import ToggleButton from '../components/ToggleButton.vue'
-import PickZone from '../components/PickZone.vue'
-
+import Tab from '../components/pick/Tab.vue'
+import MainSwitch from '../components/MainSwitch.vue'
 export default {
   name: 'App',
-
   components: {
-    ToggleButton,
-    PickZone
+    Tab,
+    MainSwitch,
   },
-
 }
 </script>
-
-<style>
-
-</style>

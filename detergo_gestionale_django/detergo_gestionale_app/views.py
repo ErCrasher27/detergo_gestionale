@@ -7,44 +7,44 @@ from .models import *
 from .serializers import *
 
 
-class ClientiList(APIView):
+class CustomerList(APIView):
     def get(self, request, format=None):
-        cliente = Cliente.objects.all()[0:4]
-        serializers = ClienteSerializer(cliente, many=True)
+        customer = Customer.objects.all()[0:4]
+        serializers = CustomerSerializer(customer, many=True)
         return Response(serializers.data)
     
-class OrdiniList(APIView):
+class OrderList(APIView):
     def get(self, request, format=None):
-        ordine = Ordine.objects.all()[0:4]
-        serializers = OrdineSerializer(ordine, many=True)
+        order = Order.objects.all()[0:4]
+        serializers = OrderSerializer(order, many=True)
         return Response(serializers.data)
     
-class CategorieList(APIView):
+class CategoryList(APIView):
     def get(self, request, format=None):
-        categoria = Categoria.objects.all()[0:4]
-        serializers = CategoriaSerializer(categoria, many=True)
+        category = Category.objects.all()[0:4]
+        serializers = CategorySerializer(category, many=True)
         return Response(serializers.data)
     
-class ArticoliList(APIView):
+class ItemList(APIView):
     def get(self, request, format=None):
-        articolo = Articolo.objects.all()[0:4]
-        serializers = ArticoloSerializer(articolo, many=True)
+        item = Item.objects.all()[0:4]
+        serializers = ItemSerializer(item, many=True)
         return Response(serializers.data)
     
-class ColoriList(APIView):
+class ColorList(APIView):
     def get(self, request, format=None):
-        colore = Colore.objects.all()[0:4]
-        serializers = ColoreSerializer(colore, many=True)
+        color = Color.objects.all()[0:4]
+        serializers = ColorSerializer(color, many=True)
         return Response(serializers.data)
     
-class DifettiList(APIView):
+class DefectList(APIView):
     def get(self, request, format=None):
-        difetto = Difetto.objects.all()[0:4]
-        serializers = DifettoSerializer(difetto, many=True)
+        defect = Defect.objects.all()[0:4]
+        serializers = DefectSerializer(defect, many=True)
         return Response(serializers.data)
     
-class CapiPortatiList(APIView):
+class BroughtItemList(APIView):
     def get(self, request, format=None):
-        capoPortato = CapoPortato.objects.all()[0:4]
-        serializers = CapoPortatoSerializer(capoPortato, many=True)
+        broughtItem = BroughtItem.objects.all()[0:4]
+        serializers = BroughtItemSerializer(broughtItem, many=True)
         return Response(serializers.data)
