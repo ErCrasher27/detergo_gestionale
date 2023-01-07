@@ -10,4 +10,6 @@ urlpatterns = [
     path('colors/', views.CustomerList.as_view()),
     path('defects/', views.DefectList.as_view()),
     path('carriedItems/', views.BroughtItemList.as_view()),
+    
+    path('itemByCategory/<int:idCategory>/', views.ItemListByCategory.as_view()),
 ]

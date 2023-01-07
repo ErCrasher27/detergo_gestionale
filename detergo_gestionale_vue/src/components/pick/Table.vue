@@ -32,7 +32,7 @@ export default {
     methods: {
         getItem() {
             axios
-                .get('/api/v1/articoli/')
+                .get('/api/v1/itemByCategory/')
                 .then(response => {
                     this.items = response.data
                 })

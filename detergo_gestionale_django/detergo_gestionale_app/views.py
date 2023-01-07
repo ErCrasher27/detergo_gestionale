@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -47,4 +47,15 @@ class BroughtItemList(APIView):
     def get(self, request, format=None):
         broughtItem = BroughtItem.objects.all()[0:4]
         serializers = BroughtItemSerializer(broughtItem, many=True)
+        return Response(serializers.data)
+    
+class ItemListByCategory(APIView):
+    
+    def get_object(self, idCategory):
+        query = Item.objects.filter(id_category = idCategory)
+        return query
+        
+    def get(self, request, idCategory):
+        interface = self.get_object(idCategory)
+        serializers = ItemSerializer(interface, many=True)
         return Response(serializers.data)
