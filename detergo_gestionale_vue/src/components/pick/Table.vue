@@ -1,8 +1,8 @@
 <template>
     <div class="table-container">
         <table class="table">
-            <div v-for="category in categories">
-                <Item :item="items"></Item>
+            <div v-for="item in items">
+                <Item :item="items.name"></Item>
             </div>
         </table>
     </div>
@@ -13,8 +13,8 @@ import axios from 'axios'
 import Item from './Item.vue'
 export default {
     props: {
-        tab: {
-            type: String,
+        tabId: {
+            type: Number,
             required: true
         }
     },
@@ -32,7 +32,7 @@ export default {
     methods: {
         getItem() {
             axios
-                .get('/api/v1/itemByCategory/')
+                .get('/api/v1/itemByCategory/' + this.tabId + '/')
                 .then(response => {
                     this.items = response.data
                 })

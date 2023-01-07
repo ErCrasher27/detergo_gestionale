@@ -2,17 +2,17 @@
     <div class="tabs is-centered is-boxed is-medium">
         <div v-for="category in categories">
             <ul>
-                <li :class="{ 'is-active': currentTab == category.name }">
-                    <a @click="currentTab = category.name">
-                        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+                <li :class="{ 'is-active': tabId == category.id }">
+                    <a @click="setCategory(category.id, category.name)">
+                        <span class="icon is-small"><img :src="category.icon"></span>
                         <span>{{ category.name }}</span>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-    <Table v-bind:tab="currentTab">
-    </Table>
+     <Table v-bind:tabId="tabId">
+    </Table> 
 </template>
 
 <script>
@@ -22,7 +22,8 @@ export default {
     data() {
         return {
             categories: [],
-            tab: ''
+            currentTabId: '',
+            currentTabName: ''
         }
     },
     components: {
@@ -32,6 +33,10 @@ export default {
         this.getCategories()
     },
     methods: {
+        setCategory(id, name, icon) {
+            this.tabId = id
+            this.tabName = name
+        },
         getCategories() {
             axios
                 .get('/api/v1/categories/')
@@ -44,12 +49,20 @@ export default {
         }
     },
     computed: {
-        currentTab : {
+        tabId: {
             get() {
-                return this.tab;
+                return this.currentTabId;
             },
             set(newValue) {
-                this.tab = newValue;
+                this.currentTabId = newValue;
+            }
+        },
+        tabName: {
+            get() {
+                return this.currentTabName;
+            },
+            set(newValue) {
+                this.currentTabName = newValue;
             }
         }
     }
