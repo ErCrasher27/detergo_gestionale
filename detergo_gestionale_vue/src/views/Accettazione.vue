@@ -2,13 +2,13 @@
   <div class="container is-fluid">
     <div class="columns is-centered">
       <div class="column is-4">
-        <Tab></Tab>
+        <Tab maxi="LE"></Tab>
       </div>
       <div class="column is-3">
         Second column
       </div>
       <div class="column is-4">
-        <Tab></Tab>
+        <Tab maxi="RI"></Tab>
       </div>
     </div>
     <div class="is-flex is-justify-content-center">

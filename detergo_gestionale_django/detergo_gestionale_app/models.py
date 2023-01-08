@@ -44,8 +44,13 @@ class Order(models.Model):
 
 
 class Category(models.Model):
+    maxi = [
+        ('LE', 'left'),
+        ('RI', 'right'),
+    ]
     name = models.CharField(max_length=64)
     icon = models.ImageField(upload_to='uploads/')
+    maxi = models.CharField(max_length=2, choices=maxi)
 
     class Meta:
         verbose_name = "Category"

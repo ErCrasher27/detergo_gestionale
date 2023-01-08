@@ -10,5 +10,6 @@ urlpatterns = [
     path('colors/', views.CustomerList.as_view()),
     path('carriedItems/', views.BroughtItemList.as_view()),
     
-    path('itemByCategory/<int:idCategory>/', views.ItemListByCategory.as_view()),
+    path('itemsByCategory/<int:idCategory>/', views.ItemsListByCategory.as_view()),
+    path('categoriesByMaxi/<str:maxi>/', views.CategoriesByMaxi.as_view())
 ]

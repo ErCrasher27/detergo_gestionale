@@ -32,7 +32,7 @@ export default {
     methods: {
         getItemByCategory() {
             axios
-                .get('/api/v1/itemByCategory/' + this.tabId + '/')
+                .get('/api/v1/itemsByCategory/' + this.tabId + '/')
                 .then(response => {
                     this.itemsByCategory = response.data
                 })

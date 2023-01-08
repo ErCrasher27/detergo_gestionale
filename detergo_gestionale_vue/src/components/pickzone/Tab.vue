@@ -1,6 +1,6 @@
 <template>
     <div class="tabs is-centered is-boxed is-medium">
-        <div v-for="category in categories">
+        <div v-for="category in categoriesByMaxi">
             <ul>
                 <li :class="{ 'is-active': tabId == category.id }">
                     <a @click="setCategory(category.id, category.name)">
@@ -21,9 +21,15 @@
 import axios from 'axios'
 import Table from './Table.vue'
 export default {
+    props: {
+        maxi: {
+            type: String,
+            required: true
+        }
+    },
     data() {
         return {
-            categories: [],
+            categoriesByMaxi: [],
             currentTabId: '',
             currentTabName: ''
         }
@@ -32,18 +38,18 @@ export default {
         Table
     },
     mounted() {
-        this.getCategories()
+        this.getCategoriesByMaxi()
     },
     methods: {
         setCategory(id, name) {
             this.tabId = id
             this.tabName = name
         },
-        getCategories() {
+        getCategoriesByMaxi() {
             axios
-                .get('/api/v1/categories/')
+                .get('/api/v1/categoriesByMaxi/' + this.maxi)
                 .then(response => {
-                    this.categories = response.data
+                    this.categoriesByMaxi = response.data
                 })
                 .catch(error => {
                     console.log(error)
@@ -70,7 +76,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-</style>
-

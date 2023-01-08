@@ -22,6 +22,7 @@ class CategorySerializer(serializers.ModelSerializer):
             "id",
             "name",
             "get_icon",
+            "maxi",
         )
 
 
