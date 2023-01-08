@@ -37,12 +37,6 @@ class ColorList(APIView):
         serializers = ColorSerializer(color, many=True)
         return Response(serializers.data)
     
-class DefectList(APIView):
-    def get(self, request, format=None):
-        defect = Defect.objects.all()[0:4]
-        serializers = DefectSerializer(defect, many=True)
-        return Response(serializers.data)
-    
 class BroughtItemList(APIView):
     def get(self, request, format=None):
         broughtItem = BroughtItem.objects.all()[0:4]

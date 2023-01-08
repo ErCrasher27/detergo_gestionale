@@ -45,26 +45,28 @@ class Order(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
-    icon = models.ImageField(upload_to='uploads/', blank=True, null=True)
-    
+    icon = models.ImageField(upload_to='uploads/')
+
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
-
-    def __str__(self):
-        return self.name
 
     def get_icon(self):
         if self.icon:
             return 'http://127.0.0.1:8000' + self.icon.url
         return ''
 
+    def __str__(self):
+        return self.name
+
+
 class Item(models.Model):
     name = models.CharField(max_length=64)
-    icon = models.ImageField(upload_to='uploads/', blank=True, max_length=256)
-    water_price = models.FloatField()
-    dry_price = models.FloatField()
-    tailoring_price = models.FloatField()
+    icon = models.ImageField(upload_to='uploads/', max_length=256)
+    water_price = models.FloatField(null=True)
+    dry_price = models.FloatField(null=True)
+    ironing_price = models.FloatField(null=True)
+    tailoring_price = models.FloatField(null=True)
     id_category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='get_category')
 
@@ -72,13 +74,18 @@ class Item(models.Model):
         verbose_name = "Item"
         verbose_name_plural = "Items"
 
+    def get_icon(self):
+        if self.icon:
+            return 'http://127.0.0.1:8000' + self.icon.url
+        return ''
+
     def __str__(self):
         return self.name
 
 
 class Color(models.Model):
     name = models.CharField(max_length=64)
-    icon = models.ImageField(upload_to='uploads/', blank=True, max_length=256)
+    icon = models.ImageField(upload_to='uploads/', max_length=256)
 
     class Meta:
         verbose_name = "Color"
@@ -86,18 +93,6 @@ class Color(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Defect(models.Model):
-    nome = models.CharField(max_length=64)
-    icon = models.ImageField(upload_to='uploads/', blank=True, max_length=256)
-
-    class Meta:
-        verbose_name = "Defect"
-        verbose_name_plural = "Defects"
-
-    def __str__(self):
-        return self.nome
 
 
 class BroughtItem(models.Model):
@@ -110,12 +105,12 @@ class BroughtItem(models.Model):
     price = models.FloatField(null=True)
     photo = models.ImageField(upload_to='uploads/',
                               blank=True, max_length=256, null=True)
+    notes = models.CharField(max_length=256, null=True)
     id_order = models.ForeignKey(
         Order, on_delete=models.CASCADE, related_name='get_order')
     id_item = models.ForeignKey(
         Item, on_delete=models.CASCADE, related_name='get_item')
     color = models.ManyToManyField(Color)
-    defect = models.ManyToManyField(Defect)
 
     class Meta:
         verbose_name = "BroughtItem"

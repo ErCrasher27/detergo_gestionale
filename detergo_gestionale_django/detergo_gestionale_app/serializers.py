@@ -28,18 +28,22 @@ class CategorySerializer(serializers.ModelSerializer):
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
-        fields = "__all__"
+        fields = (
+            "id",
+            "name",
+            "get_icon",
+            "water_price",
+            "dry_price",
+            "ironing_price",
+            "tailoring_price",
+            "id_category",
+        )
+
 
 
 class ColorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Color
-        fields = "__all__"
-
-
-class DefectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Defect
         fields = "__all__"
 
 

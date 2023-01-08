@@ -10,6 +10,8 @@
                 </li>
             </ul>
         </div>
+    </div>
+    <div>
         <Table v-bind:tabId="tabId">
         </Table>
     </div>
@@ -68,4 +70,7 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+</style>
 

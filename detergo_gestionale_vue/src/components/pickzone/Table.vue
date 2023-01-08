@@ -1,10 +1,8 @@
 <template>
-    <div class="table-container">
-        <table class="table">
-            <div v-for="item in itemsByCategory">
-                <Item :item = item></Item>
-            </div>
-        </table>
+    <div class="is-flex is-flex-direction-row is-flex-wrap-wrap	is-justify-content-flex-start">
+        <div v-for="item in itemsByCategory">
+            <Item :item=item></Item>
+        </div>
     </div>
 </template>
 
@@ -27,7 +25,7 @@ export default {
         }
     },
     watch: {
-        tabId(){
+        tabId() {
             this.getItemByCategory()
         }
     },
@@ -36,7 +34,6 @@ export default {
             axios
                 .get('/api/v1/itemByCategory/' + this.tabId + '/')
                 .then(response => {
-                    console.log(response.data)
                     this.itemsByCategory = response.data
                 })
                 .catch(error => {
