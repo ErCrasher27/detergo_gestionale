@@ -10,9 +10,6 @@
                 </li>
             </ul>
         </div>
-        <div>
-            {{tabId}}
-        </div>
         <Table v-bind:tabId="tabId">
         </Table>
     </div>
