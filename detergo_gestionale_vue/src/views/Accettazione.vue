@@ -4,8 +4,8 @@
       <div class="column is-4">
         <Tab maxi="LE"></Tab>
       </div>
-      <div class="column is-3">
-        Second column
+      <div class="column is-4 is-flex is-justify-content-center">
+        <Receipt></Receipt>
       </div>
       <div class="column is-4">
         <Tab maxi="RI"></Tab>
@@ -18,13 +18,15 @@
 </template>
 
 <script>
-import Tab from '../components/pickzone/Tab.vue'
+import Tab from '../components/acceptance/pickzone/Tab.vue'
+import Receipt from '../components/acceptance/Receipt.vue'
 import MainSwitch from '../components/MainSwitch.vue'
 export default {
   name: 'App',
   components: {
     Tab,
     MainSwitch,
+    Receipt
   },
 }
 </script>
