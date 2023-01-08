@@ -1,8 +1,9 @@
 <template>
     <div class="table-container">
         <table class="table">
-            <div v-for="item in items">
-                <Item :item="items.name"></Item>
+            {{(tabId)}}
+            <div v-for="item in itemsByCategory">
+                {{tabId}}
             </div>
         </table>
     </div>
@@ -10,7 +11,6 @@
 
 <script>
 import axios from 'axios'
-import Item from './Item.vue'
 export default {
     props: {
         tabId: {
@@ -19,27 +19,29 @@ export default {
         }
     },
     components: {
-        Item
     },
     data() {
         return {
-            items: [],
+            itemsByCategory: [],
         }
     },
-    mounted() {
-        this.getItem()
+    watch: {
+        tabId(){
+            this.getItem()
+        }
     },
     methods: {
         getItem() {
             axios
                 .get('/api/v1/itemByCategory/' + this.tabId + '/')
                 .then(response => {
-                    this.items = response.data
+                    console.log(response.data)
+                    this.itemsByCategory = response.data
                 })
                 .catch(error => {
                     console.log(error)
                 })
         }
-    },
+    }
 }
 </script>

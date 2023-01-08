@@ -4,15 +4,18 @@
             <ul>
                 <li :class="{ 'is-active': tabId == category.id }">
                     <a @click="setCategory(category.id, category.name)">
-                        <span class="icon is-small"><img :src="category.icon"></span>
+                        <span class="icon is-small"><img :src="category.get_icon" alt=""></span>
                         <span>{{ category.name }}</span>
                     </a>
                 </li>
             </ul>
         </div>
+        <div>
+            {{tabId}}
+        </div>
+        <Table v-bind:tabId="tabId">
+        </Table>
     </div>
-     <Table v-bind:tabId="tabId">
-    </Table> 
 </template>
 
 <script>
@@ -33,7 +36,7 @@ export default {
         this.getCategories()
     },
     methods: {
-        setCategory(id, name, icon) {
+        setCategory(id, name) {
             this.tabId = id
             this.tabName = name
         },
