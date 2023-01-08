@@ -1,115 +1,125 @@
+from io import BytesIO
+from PIL import Image
+from django.core.files import File
 from django.db import models
 
-class Cliente(models.Model):
-    nome = models.CharField(max_length=64)
-    cognome = models.CharField(max_length=64)
-    telefono = models.CharField(max_length=16, null=True)
-    indirizzo = models.CharField(max_length=128, null=True)
-    note = models.CharField(max_length=256, null=True)
 
-    def __str__(self):
-        return self.nome + " " + self.cognome
+class Customer(models.Model):
+    name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    phone = models.CharField(max_length=16, null=True)
+    address = models.CharField(max_length=128, null=True)
+    notes = models.CharField(max_length=256, null=True)
 
     class Meta:
-        verbose_name = "Cliente"
-        verbose_name_plural = "Clienti"
+        verbose_name = "Customer"
+        verbose_name_plural = "Customers"
+
+    def __str__(self):
+        return self.name + " " + self.last_name
 
 
-class Ordine(models.Model):
-    stato = [
-        ('NO', 'non_iniziato'),
-        ('PA', 'pariziale'),
-        ('CO', 'completato')
+class Order(models.Model):
+    state = [
+        ('NS', 'not_started'),
+        ('PA', 'partial'),
+        ('CO', 'completed')
     ]
-    data_attuale = models.DateTimeField(auto_now=True)
-    data_ritiro = models.DateField()
-    totale = models.FloatField()
-    credito = models.FloatField()
-    domicilio = models.BooleanField()
-    stato = models.CharField(max_length=2, choices=stato)
-    note = models.CharField(max_length=256)
-    id_cliente = models.ForeignKey(
-        Cliente, on_delete=models.CASCADE, related_name='get_cliente')
-
-    def __str__(self):
-        return self.data_attuale
+    current_date = models.DateTimeField(auto_now=True)
+    pickup_date = models.DateField()
+    total = models.FloatField()
+    credit = models.FloatField()
+    domicile = models.BooleanField()
+    state = models.CharField(max_length=2, choices=state)
+    notes = models.CharField(max_length=256)
+    id_customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name='get_customer')
 
     class Meta:
-        verbose_name = "Ordine"
-        verbose_name_plural = "Ordini"
-
-
-class Categoria(models.Model):
-    nome = models.CharField(max_length=64)
-    icona = models.CharField(max_length=256, null=True)
+        verbose_name = "Order"
+        verbose_name_plural = "Orders"
 
     def __str__(self):
-        return self.nome
-
-    class Meta:
-        verbose_name = "Categoria"
-        verbose_name_plural = "Categorie"
+        return self.current_date
 
 
-class Articolo(models.Model):
-    nome = models.CharField(max_length=64)
-    prezzo_acqua = models.FloatField()
-    prezzo_secco = models.FloatField()
-    prezzo_sartoria = models.FloatField()
-    id_categoria = models.ForeignKey(
-        Categoria, on_delete=models.CASCADE, related_name='get_categoria')
-
-    def __str__(self):
-        return self.nome
-
-    class Meta:
-        verbose_name = "Articolo"
-        verbose_name_plural = "Articoli"
-
-
-class Colore(models.Model):
-    nome = models.CharField(max_length=64)
-    icona = models.CharField(max_length=256)
-
-    def __str__(self):
-        return self.nome
-
-    class Meta:
-        verbose_name = "Colore"
-        verbose_name_plural = "Colori"
-
-
-class Difetto(models.Model):
-    nome = models.CharField(max_length=64)
-    icona = models.CharField(max_length=256)
-
-    def __str__(self):
-        return self.nome
-
-    class Meta:
-        verbose_name = "Difetto"
-        verbose_name_plural = "Difetti"
-        
-
-class CapoPortato(models.Model):
-    stato = [
-        ('NO', 'non_iniziato'),
-        ('PA', 'pariziale'),
-        ('CO', 'completato')
+class Category(models.Model):
+    maxi = [
+        ('LE', 'left'),
+        ('RI', 'right'),
     ]
-    stato = models.CharField(max_length=2, choices=stato)
-    prezzo_modificato = models.FloatField(null=True)
-    foto = models.CharField(max_length=256, null=True)
-    id_ordine = models.ForeignKey(
-        Ordine, on_delete=models.CASCADE, related_name='get_ordine')
-    id_articolo = models.ForeignKey(
-        Articolo, on_delete=models.CASCADE, related_name='get_articolo')
-    colore = models.ManyToManyField(Colore)
-    difetto = models.ManyToManyField(Difetto)
-
-    def __str__(self):
-        return self.id_ordine + " " + self.id_articolo
+    name = models.CharField(max_length=64)
+    icon = models.ImageField(upload_to='uploads/')
+    maxi = models.CharField(max_length=2, choices=maxi)
 
     class Meta:
-        verbose_name = "CapoPortato"
-        verbose_name_plural = "CapiPortati"
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+    def get_icon(self):
+        if self.icon:
+            return 'http://127.0.0.1:8000' + self.icon.url
+        return ''
+
+    def __str__(self):
+        return self.name
+
+
+class Item(models.Model):
+    name = models.CharField(max_length=64)
+    icon = models.ImageField(upload_to='uploads/', max_length=256)
+    water_price = models.FloatField(null=True)
+    dry_price = models.FloatField(null=True)
+    ironing_price = models.FloatField(null=True)
+    tailoring_price = models.FloatField(null=True)
+    id_category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name='get_category')
+
+    class Meta:
+        verbose_name = "Item"
+        verbose_name_plural = "Items"
+
+    def get_icon(self):
+        if self.icon:
+            return 'http://127.0.0.1:8000' + self.icon.url
+        return ''
+
+    def __str__(self):
+        return self.name
+
+
+class Color(models.Model):
+    name = models.CharField(max_length=64)
+    icon = models.ImageField(upload_to='uploads/', max_length=256)
+
+    class Meta:
+        verbose_name = "Color"
+        verbose_name_plural = "Colors"
+
+    def __str__(self):
+        return self.name
+
+
+class BroughtItem(models.Model):
+    state = [
+        ('NS', 'not_started'),
+        ('PA', 'partial'),
+        ('CO', 'completed')
+    ]
+    state = models.CharField(max_length=2, choices=state)
+    price = models.FloatField(null=True)
+    photo = models.ImageField(upload_to='uploads/',
+                              blank=True, max_length=256, null=True)
+    notes = models.CharField(max_length=256, null=True)
+    id_order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name='get_order')
+    id_item = models.ForeignKey(
+        Item, on_delete=models.CASCADE, related_name='get_item')
+    color = models.ManyToManyField(Color)
+
+    class Meta:
+        verbose_name = "BroughtItem"
+        verbose_name_plural = "CarriedItems"
+
+    def __str__(self):
+        return self.id_order + " " + self.id_item

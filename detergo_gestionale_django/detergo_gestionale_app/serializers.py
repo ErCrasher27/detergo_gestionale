@@ -2,37 +2,53 @@ from rest_framework import serializers
 
 from .models import *
 
-class ClienteSerializer(serializers.ModelSerializer):
+
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cliente
+        model = Customer
         fields = "__all__"
 
-class OrdineSerializer(serializers.ModelSerializer):
+
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ordine
+        model = Order
         fields = "__all__"
-        
-class CategoriaSerializer(serializers.ModelSerializer):
+
+
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Categoria
+        model = Category
+        fields = (
+            "id",
+            "name",
+            "get_icon",
+            "maxi",
+        )
+
+
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = (
+            "id",
+            "name",
+            "get_icon",
+            "water_price",
+            "dry_price",
+            "ironing_price",
+            "tailoring_price",
+            "id_category",
+        )
+
+
+
+class ColorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Color
         fields = "__all__"
-        
-class ArticoloSerializer(serializers.ModelSerializer):
+
+
+class BroughtItemSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Articolo
-        fields = "__all__"
-        
-class ColoreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Colore
-        fields = "__all__"
-        
-class DifettoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Difetto
-        fields = "__all__"
-        
-class CapoPortatoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CapoPortato
+        model = BroughtItem
         fields = "__all__"

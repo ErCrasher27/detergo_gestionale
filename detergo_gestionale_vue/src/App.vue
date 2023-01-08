@@ -2,9 +2,9 @@
   <div id="wrapper">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <router-link to="/home" class="navbar-item">
+        <router-link to="/accettazione" class="navbar-item">
           <a class="navbar-item">
-            <img src="./assets/logo-detergo-svg.svg" width="117" height="67">
+            <img src="./assets/logo_detergo.svg" width="117" height="67">
           </a>
         </router-link>
 
@@ -78,6 +78,7 @@
 }
 
 #wrapper .section {
-  background: #004A7E;
+  background: #619eca;
+  padding: 3rem 1rem;
 }
 </style>

@@ -3,11 +3,13 @@ from django.urls import path, include
 from detergo_gestionale_app import views
 
 urlpatterns = [
-    path('clienti/', views.ClientiList.as_view()),
-    path('ordini/', views.OrdiniList.as_view()),
-    path('categorie/', views.CategorieList.as_view()),
-    path('articoli/', views.ArticoliList.as_view()),
-    path('colori/', views.ColoriList.as_view()),
-    path('difetti/', views.DifettiList.as_view()),
-    path('capiportati/', views.CapiPortatiList.as_view()),
+    path('customers/', views.CustomerList.as_view()),
+    path('orders/', views.OrderList.as_view()),
+    path('categories/', views.CategoryList.as_view()),
+    path('items/', views.ItemList.as_view()),
+    path('colors/', views.CustomerList.as_view()),
+    path('carriedItems/', views.BroughtItemList.as_view()),
+    
+    path('itemsByCategory/<int:idCategory>/', views.ItemsListByCategory.as_view()),
+    path('categoriesByMaxi/<str:maxi>/', views.CategoriesByMaxi.as_view())
 ]

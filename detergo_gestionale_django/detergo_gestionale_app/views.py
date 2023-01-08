@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,44 +7,65 @@ from .models import *
 from .serializers import *
 
 
-class ClientiList(APIView):
+class CustomerList(APIView):
     def get(self, request, format=None):
-        cliente = Cliente.objects.all()[0:4]
-        serializers = ClienteSerializer(cliente, many=True)
+        customer = Customer.objects.all()[0:4]
+        serializers = CustomerSerializer(customer, many=True)
         return Response(serializers.data)
-    
-class OrdiniList(APIView):
+
+
+class OrderList(APIView):
     def get(self, request, format=None):
-        ordine = Ordine.objects.all()[0:4]
-        serializers = OrdineSerializer(ordine, many=True)
+        order = Order.objects.all()[0:4]
+        serializers = OrderSerializer(order, many=True)
         return Response(serializers.data)
-    
-class CategorieList(APIView):
+
+
+class CategoryList(APIView):
     def get(self, request, format=None):
-        categoria = Categoria.objects.all()[0:4]
-        serializers = CategoriaSerializer(categoria, many=True)
+        category = Category.objects.all()[0:4]
+        serializers = CategorySerializer(category, many=True)
         return Response(serializers.data)
-    
-class ArticoliList(APIView):
+
+
+class ItemList(APIView):
     def get(self, request, format=None):
-        articolo = Articolo.objects.all()[0:4]
-        serializers = ArticoloSerializer(articolo, many=True)
+        item = Item.objects.all()[0:4]
+        serializers = ItemSerializer(item, many=True)
         return Response(serializers.data)
-    
-class ColoriList(APIView):
+
+
+class ColorList(APIView):
     def get(self, request, format=None):
-        colore = Colore.objects.all()[0:4]
-        serializers = ColoreSerializer(colore, many=True)
+        color = Color.objects.all()[0:4]
+        serializers = ColorSerializer(color, many=True)
         return Response(serializers.data)
-    
-class DifettiList(APIView):
+
+
+class BroughtItemList(APIView):
     def get(self, request, format=None):
-        difetto = Difetto.objects.all()[0:4]
-        serializers = DifettoSerializer(difetto, many=True)
+        broughtItem = BroughtItem.objects.all()[0:4]
+        serializers = BroughtItemSerializer(broughtItem, many=True)
         return Response(serializers.data)
-    
-class CapiPortatiList(APIView):
-    def get(self, request, format=None):
-        capoPortato = CapoPortato.objects.all()[0:4]
-        serializers = CapoPortatoSerializer(capoPortato, many=True)
+
+
+class ItemsListByCategory(APIView):
+    def get_object(self, idCategory):
+        query = Item.objects.filter(id_category=idCategory)
+        return query
+
+    def get(self, request, idCategory):
+        interface = self.get_object(idCategory)
+        serializers = ItemSerializer(interface, many=True)
+        return Response(serializers.data)
+
+
+class CategoriesByMaxi(APIView):
+    def get_object(self, maxi):
+        query = Category.objects.filter(maxi=maxi)
+        return query
+
+    def get(self, request, maxi):
+        interface = self.get_object(maxi)
+        serializers = CategorySerializer(interface, many=True)
         return Response(serializers.data)
