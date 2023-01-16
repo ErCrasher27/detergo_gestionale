@@ -24,27 +24,17 @@
                 <th><button class="button">note</button></th>
             </tr>
         </tfoot>
-        <tbody>
+        <tbody v-for="item in $store.state.items">
             <tr>
-                <td>Gonna</td>
-                <td>L1</td>
-                <td>5,00</td>
-            </tr>
-            <tr>
-                <td>Pantalone</td>
-                <td>L2</td>
-                <td>9,00</td>
-            </tr>
-            <tr>
-                <td>Piumone</td>
-                <td>L1</td>
-                <td>16,00</td>
-            </tr>
-            <tr>
-                <td>Maglia</td>
-                <td>L1</td>
-                <td>5,00</td>
+                <td>{{item.name}}</td>
+                <td>{{item.water_price}}</td>
+                <td>{{item.water_price}}</td>
             </tr>
         </tbody>
     </table>
 </template>
+
+<script>
+export default {
+}
+</script>

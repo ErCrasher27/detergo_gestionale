@@ -22,7 +22,6 @@ import Tab from '../components/acceptance/pickzone/Tab.vue'
 import Receipt from '../components/acceptance/Receipt.vue'
 import MainSwitch from '../components/MainSwitch.vue'
 export default {
-  name: 'App',
   components: {
     Tab,
     MainSwitch,

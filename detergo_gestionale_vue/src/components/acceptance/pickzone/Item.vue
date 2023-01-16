@@ -16,7 +16,7 @@
         <div class="modal-background" v-on:click="isShowModal = false"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">{{item.name}}</p>
+                <p class="modal-card-title">{{ item.name }}</p>
                 <button class="delete" aria-label="close" v-on:click="isShowModal = false"></button>
             </header>
             <section class="modal-card-body">
@@ -24,7 +24,7 @@
             </section>
             <footer class="modal-card-foot">
                 <button class="button" v-on:click="isShowModal = false">Annulla</button>
-                <button class="button">Aggiungi</button>
+                <button @click="$store.dispatch('addToReceipt', item)" class="button">Aggiungi</button>
             </footer>
         </div>
     </div>
@@ -41,7 +41,6 @@ export default {
     data() {
         return {
             isShowModal: false
-
         }
     }
 }
