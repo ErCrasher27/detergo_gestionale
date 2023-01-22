@@ -2,7 +2,7 @@
   <div id="wrapper">
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <router-link to="/accettazione" class="navbar-item">
+        <router-link to="/acceptance" class="navbar-item">
           <a class="navbar-item">
             <img src="./assets/logo_detergo.svg" width="117" height="67">
           </a>

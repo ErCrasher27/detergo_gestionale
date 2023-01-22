@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Accettazione from '../views/Accettazione.vue'
+import Acceptance from '../views/Acceptance.vue'
 
 const routes = [
   {
-    path: '/accettazione',
-    name: 'accettazione',
-    component: Accettazione
+    path: '/acceptance',
+    name: 'acceptance',
+    component: Acceptance
   },
 ]
 

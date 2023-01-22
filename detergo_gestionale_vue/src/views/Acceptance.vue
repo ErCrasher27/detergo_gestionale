@@ -19,7 +19,7 @@
 
 <script>
 import Tab from '../components/acceptance/pickzone/Tab.vue'
-import Receipt from '../components/acceptance/Receipt.vue'
+import Receipt from '../components/acceptance/receipt/Receipt.vue'
 import MainSwitch from '../components/MainSwitch.vue'
 export default {
   components: {

@@ -19,9 +19,9 @@
                 <th>Note: questo scontrino è urgente perchè il cliente deve andare ad una cerimonia</th>
             </tr>
             <tr>
-                <th><button class="button">Clienti</button></th>
-                <th><button class="button">Restituzione</button></th>
-                <th><button class="button">note</button></th>
+                <th><Customers></Customers></th>
+                <th><PickDate></PickDate></th>
+                <th><Notes></Notes></th>
             </tr>
         </tfoot>
         <tbody v-for="item in $store.state.items">
@@ -35,4 +35,14 @@
 </template>
 
 <script>
+import Customers from './Customers.vue'
+import PickDate from './PickDate.vue'
+import Notes from './Notes.vue'
+export default {
+    components: {
+        Customers,
+        PickDate,
+        Notes
+    }
+}
 </script>
