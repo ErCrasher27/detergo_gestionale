@@ -8,16 +8,10 @@
                 <button class="delete" aria-label="close" v-on:click="isShowModal = false"></button>
             </header>
             <section class="modal-card-body">
-                <div class="select">
-                    <select @change="onChangeFindFor($event)">
-                        <option value="1">cerca per id</option>
-                        <option value="2">cerca per Nome e Cognome</option>
-                        <option value="3">cerca per Telefono</option>
-                    </select>
-                </div>
                 <div class="field">
                     <div class="control is-large is-loading">
-                        <input v-model="search" class="input is-large" type="text" placeholder="cerca cliente">
+                        <input type="text" class="input is-large" placeholder="Filtra per codice, nome o telefono"
+                            v-model="filter" />
                     </div>
                 </div>
                 <table class="table is-striped is-hoverable">
@@ -27,10 +21,11 @@
                         <th>Telefono</th>
                     </thead>
                     <tbody>
-                        <tr v-for="customer in customers">
-                            <td>{{ customer.id }}</td>
-                            <td>{{ customer.name + ' ' + customer.last_name }}</td>
-                            <td>{{ customer.phone }}</td>
+                        <tr v-for="row in filteredRows">
+                            <td v-html="highlightMatches(row.id)"></td>
+                            <td v-html="highlightMatches(row.name)"></td>
+                            <td v-html="highlightMatches(row.last_name)"></td>
+                            <td v-html="highlightMatches(row.phone)"></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -107,14 +102,13 @@
 
 <script>
 import axios from 'axios'
+import { response } from 'express';
 export default {
     data() {
         return {
             isShowModal: false,
             customers: [],
-            findFor: null,
-            search: '',
-            searchValue: '',
+            filter: "",
             addNewCustomer: false,
         }
     },
@@ -124,6 +118,20 @@ export default {
     watch: {
         search: function (searchValue) {
             this.searchValue = searchValue;
+        }
+    },
+    computed: {
+        filteredRows() {
+            return this.customers.filter(row => {
+                const id = row.id.toString().toLowerCase();
+                const name = row.name.toLowerCase();
+                const lastName = row.last_name.toLowerCase();
+                const phone = row.phone.toLowerCase();
+                const searchTerm = this.filter.toLowerCase();
+                return (
+                    id.includes(searchTerm) || name.includes(searchTerm) || lastName.includes(searchTerm) || phone.includes(searchTerm)
+                );
+            });
         }
     },
     methods: {
@@ -137,9 +145,22 @@ export default {
                     console.log(error)
                 })
         },
-        onChangeFindFor(event) {
-            this.findFor = event.target.value
-            console.log(this.findFor)
+        postCustomer() {
+            axios
+                .post('/api/v1/customers/')
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+        highlightMatches(text) {
+            const textToString = text.toString();
+            const matchExists = textToString.toLowerCase().includes(this.filter.toLowerCase());
+            if (!matchExists) return textToString;
+            const re = new RegExp(this.filter, "ig");
+            return textToString.replace(re, matchedText => `<strong>${matchedText}</strong>`);
         }
     },
 }

@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -12,6 +13,13 @@ class CustomerList(APIView):
         customer = Customer.objects.all()[0:4]
         serializers = CustomerSerializer(customer, many=True)
         return Response(serializers.data)
+
+    def post(self, request):
+        serializer = CustomerSerializer(data=request.data)
+        if serializer.is_valid() and serializer.validate(data=request.data):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class OrderList(APIView):
