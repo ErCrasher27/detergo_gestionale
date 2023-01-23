@@ -7,14 +7,12 @@
             <img src="./assets/logo_detergo.svg" width="117" height="67">
           </a>
         </router-link>
-
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
-
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-end">
           <div class="navbar-item">
@@ -35,11 +33,9 @@
         </div>
       </div>
     </nav>
-
     <section class="section">
       <router-view />
     </section>
-
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
@@ -49,7 +45,6 @@
         </p>
       </div>
     </footer>
-
   </div>
 </template>
 
@@ -58,25 +53,20 @@
 
 <style lang="scss">
 @import '../node_modules/bulma';
-
 @font-face {
   font-family: "Gunterz";
   src: local("Gunterz"),
     url(./fonts/Fontspring-DEMO-gunterz-medium.otf) format("truetype");
 }
-
 .navbar .navbar-brand .navbar-item img {
   max-height: none;
 }
-
 .navbar .navbar-end .navbar-item .buttons .button.is-medium {
   background: #005C9D;
 }
-
 .navbar .navbar-menu .navbar-end .navbar-item .buttons .button.is-medium .icon i {
   color: #FFFFFF;
 }
-
 #wrapper .section {
   background: #619eca;
   padding: 3rem 1rem;

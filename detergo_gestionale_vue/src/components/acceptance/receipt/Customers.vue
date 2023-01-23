@@ -17,15 +17,18 @@
                 <table class="table is-striped is-hoverable">
                     <thead>
                         <th>Codice</th>
-                        <th>Nome e Cognome</th>
+                        <th>Nome</th>
+                        <th>Cognome</th>
                         <th>Telefono</th>
                     </thead>
                     <tbody>
-                        <tr v-for="row in filteredRows">
+                        <tr v-for="row in filteredRows" @click="idRowSelected = row.id"
+                            :class="{ 'is-selected': idRowSelected == row.id }">
                             <td v-html="highlightMatches(row.id)"></td>
                             <td v-html="highlightMatches(row.name)"></td>
                             <td v-html="highlightMatches(row.last_name)"></td>
-                            <td v-html="highlightMatches(row.phone)"></td>
+                            <td v-if="row.phone != null" v-html="highlightMatches(row.phone)"></td>
+                            <td v-else v-html="highlightMatches('//')"></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -35,54 +38,70 @@
                         </tr>
                     </tfoot>
                 </table>
-                <form @submit.prevent="insertCustomer">
+                <form @submit.prevent="insertCustomer()">
                     <div v-if="addNewCustomer">
-                        <div class="field">
-                            <label class="label">Nome*</label>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Inserisci nome" v-model="name">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <label class="label">Nome</label>
+                                    <p class="control is-expanded has-icons-left">
+                                        <input class="input" type="text" placeholder="Nome" v-model="name">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Cognome</label>
+                                    <p class="control is-expanded has-icons-left">
+                                        <input class="input" type="text" placeholder="Cognome" v-model="lastName">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="field">
-                            <label class="label">Cognome*</label>
-                            <div class="control">
-                                <input class="input" type="text" placeholder="Inserisci cognome" v-model="lastName">
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <label class="label">Numero di telefono</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        <input class="input"
+                                            :class="{ 'is-success': isValidPhone(), 'is-danger': !isValidPhone() }"
+                                            type="text" placeholder="Inserisci numero di telefono" v-model="phone">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-phone"></i>
+                                        </span>
+                                        <span v-if="!isValidPhone()" class="icon is-small is-right">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                    </div>
+                                    <p v-if="isValidPhone()" class="help is-success">Il numero di telefono inserito è
+                                        valido!
+                                    </p>
+                                    <p v-if="!isValidPhone()" class="help is-danger">Il numero di telefono inserito non
+                                        è
+                                        valido!
+                                    </p>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Email</label>
+                                    <div class="control has-icons-left has-icons-right">
+                                        <input class="input"
+                                            :class="{ 'is-success': isValidEmail(), 'is-danger': !isValidEmail() }"
+                                            type="email" placeholder="Email" v-model="email">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-envelope"></i>
+                                        </span>
+                                        <span v-if="!isValidEmail()" class="icon is-small is-right">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                    </div>
+                                    <p v-if="isValidEmail()" class="help is-success">L'email inserita è valida!</p>
+                                    <p v-if="!isValidEmail()" class="help is-danger">L'email inserita non è valida!</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Numero di telefono</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input"
-                                    :class="{ 'is-success': isValidPhone(), 'is-danger': !isValidPhone() }" type="text"
-                                    placeholder="Inserisci numero di telefono" v-model="phone">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-phone"></i>
-                                </span>
-                                <span v-if="!isValidPhone()" class="icon is-small is-right">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </span>
-                            </div>
-                            <p v-if="isValidPhone()" class="help is-success">Il numero di telefono inserito è valido!
-                            </p>
-                            <p v-if="!isValidPhone()" class="help is-danger">Il numero di telefono inserito non è
-                                valido!
-                            </p>
-                        </div>
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input"
-                                    :class="{ 'is-success': isValidEmail(), 'is-danger': !isValidEmail() }" type="email"
-                                    placeholder="Email" v-model="email">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                                <span v-if="!isValidEmail()" class="icon is-small is-right">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </span>
-                            </div>
-                            <p v-if="isValidEmail()" class="help is-success">L'email inserita è valida!</p>
-                            <p v-if="!isValidEmail()" class="help is-danger">L'email inserita non è valida!</p>
                         </div>
                         <div class="field">
                             <label class="label">Indirizzo</label>
@@ -99,12 +118,9 @@
                         <div class="notification is-danger" v-if="errors.length">
                             <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
                         </div>
-                        <div class="field is-grouped">
+                        <div class="field">
                             <div class="control">
-                                <button class="button is-link">Submit</button>
-                            </div>
-                            <div class="control">
-                                <button class="button is-link is-light">Cancel</button>
+                                <button class="button is-link">Salva</button>
                             </div>
                         </div>
                     </div>
@@ -112,7 +128,8 @@
             </section>
             <footer class="modal-card-foot">
                 <button class="button" v-on:click="isShowModal = false">Annulla</button>
-                <button @click="$store.dispatch('addToReceipt', item)" class="button">Aggiungi</button>
+                <button @click="$store.dispatch('setCustomerToReceipt', getCustomerByIdAndCloseModal(idRowSelected))"
+                    class="button">Aggiungi</button>
             </footer>
         </div>
     </div>
@@ -126,13 +143,14 @@ export default {
             isShowModal: false,
             customers: [],
             filter: "",
+            idRowSelected: null,
             addNewCustomer: false,
             name: null,
             lastName: null,
             phone: null,
+            email: null,
             address: null,
             notes: null,
-            email: null,
             errors: []
         }
     },
@@ -150,10 +168,9 @@ export default {
                 const id = row.id.toString().toLowerCase();
                 const name = row.name.toLowerCase();
                 const lastName = row.last_name.toLowerCase();
-                const phone = row.phone.toLowerCase();
                 const searchTerm = this.filter.toLowerCase();
                 return (
-                    id.includes(searchTerm) || name.includes(searchTerm) || lastName.includes(searchTerm) || phone.includes(searchTerm)
+                    id.includes(searchTerm) || name.includes(searchTerm) || lastName.includes(searchTerm)
                 );
             });
         }
@@ -182,14 +199,15 @@ export default {
                     name: this.name,
                     last_name: this.lastName,
                     phone: this.phone,
+                    email: this.email,
                     address: this.address,
                     notes: this.notes,
-                    email: this.email
                 }
                 axios
                     .post("/api/v1/customers/", formData)
                     .then(response => {
                         console.log(response)
+                        this.getCustomers()
                     })
                     .catch(error => {
                         if (error.response) {
@@ -210,6 +228,11 @@ export default {
             if (!matchExists) return textToString;
             const re = new RegExp(this.filter, "ig");
             return textToString.replace(re, matchedText => `<strong>${matchedText}</strong>`);
+        },
+        getCustomerByIdAndCloseModal(id) {
+            this.isShowModal = false
+            return this.customers
+                .filter(customer => [id].includes(customer.id))
         },
         isValidEmail() {
             return /^[^@]+@\w+(\.\w+)+\w$/.test(this.email);

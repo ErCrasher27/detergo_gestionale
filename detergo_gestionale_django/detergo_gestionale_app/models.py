@@ -7,10 +7,10 @@ from django.db import models
 class Customer(models.Model):
     name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
-    phone = models.CharField(max_length=16, null=True)
-    email = models.EmailField(max_length=256, null=True)
-    address = models.CharField(max_length=128, null=True)
-    notes = models.CharField(max_length=256, null=True)
+    phone = models.CharField(max_length=16, blank=True, null=True)
+    email = models.EmailField(max_length=256, blank=True, null=True)
+    address = models.CharField(max_length=128, blank=True, null=True)
+    notes = models.CharField(max_length=256, blank=True, null=True)
 
     class Meta:
         verbose_name = "Customer"
