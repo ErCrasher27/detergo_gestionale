@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    items: []
+    items: [],
+    isLoading: false
   },
   getters: {
     items: function (state) {
@@ -12,7 +13,10 @@ export default createStore({
   mutations: {
     UPDATE_RECEIPT(state, payload) {
       state.items = payload
-    }
+    },
+    setIsLoading(state, status) {
+      state.isLoading = status
+    },
   },
   actions: {
     addToReceipt(context, payload) {

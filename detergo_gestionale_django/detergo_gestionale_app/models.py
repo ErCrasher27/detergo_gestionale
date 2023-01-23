@@ -8,9 +8,9 @@ class Customer(models.Model):
     name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
     phone = models.CharField(max_length=16, null=True)
+    email = models.EmailField(max_length=256, null=True)
     address = models.CharField(max_length=128, null=True)
     notes = models.CharField(max_length=256, null=True)
-    email = models.EmailField(max_length=256, null=True)
 
     class Meta:
         verbose_name = "Customer"

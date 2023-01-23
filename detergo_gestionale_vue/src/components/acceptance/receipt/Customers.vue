@@ -35,62 +35,80 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div v-if="addNewCustomer">
-                    <div class="field">
-                        <label class="label">Nome</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Inserisci nome">
+                <form @submit.prevent="insertCustomer">
+                    <div v-if="addNewCustomer">
+                        <div class="field">
+                            <label class="label">Nome*</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Inserisci nome" v-model="name">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Cognome*</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Inserisci cognome" v-model="lastName">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Numero di telefono</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input"
+                                    :class="{ 'is-success': isValidPhone(), 'is-danger': !isValidPhone() }" type="text"
+                                    placeholder="Inserisci numero di telefono" v-model="phone">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <span v-if="!isValidPhone()" class="icon is-small is-right">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </span>
+                            </div>
+                            <p v-if="isValidPhone()" class="help is-success">Il numero di telefono inserito è valido!
+                            </p>
+                            <p v-if="!isValidPhone()" class="help is-danger">Il numero di telefono inserito non è
+                                valido!
+                            </p>
+                        </div>
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input"
+                                    :class="{ 'is-success': isValidEmail(), 'is-danger': !isValidEmail() }" type="email"
+                                    placeholder="Email" v-model="email">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span v-if="!isValidEmail()" class="icon is-small is-right">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </span>
+                            </div>
+                            <p v-if="isValidEmail()" class="help is-success">L'email inserita è valida!</p>
+                            <p v-if="!isValidEmail()" class="help is-danger">L'email inserita non è valida!</p>
+                        </div>
+                        <div class="field">
+                            <label class="label">Indirizzo</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Inserisci indirizzo" v-model="address">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Note</label>
+                            <div class="control">
+                                <textarea class="textarea" placeholder="Note" v-model="notes"></textarea>
+                            </div>
+                        </div>
+                        <div class="notification is-danger" v-if="errors.length">
+                            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Submit</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link is-light">Cancel</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="field">
-                        <label class="label">Cognome</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Inserisci nome">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Numero di telefono</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-phone"></i>
-                            </span>
-                            <span class="icon is-small is-right">
-                                <i class="fas fa-check"></i>
-                            </span>
-                        </div>
-                        <p class="help is-success">Questo numero di cellulare/fisso è corretto</p>
-                    </div>
-                    <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control has-icons-left has-icons-right">
-                            <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                            <span class="icon is-small is-right">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </span>
-                        </div>
-                        <p class="help is-danger">This email is invalid</p>
-                    </div>
-
-                    <div class="field">
-                        <label class="label">Note</label>
-                        <div class="control">
-                            <textarea class="textarea" placeholder="Inserisci note"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <button class="button is-link">Submit</button>
-                        </div>
-                        <div class="control">
-                            <button class="button is-link is-light">Cancel</button>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </section>
             <footer class="modal-card-foot">
                 <button class="button" v-on:click="isShowModal = false">Annulla</button>
@@ -102,7 +120,6 @@
 
 <script>
 import axios from 'axios'
-import { response } from 'express';
 export default {
     data() {
         return {
@@ -110,6 +127,13 @@ export default {
             customers: [],
             filter: "",
             addNewCustomer: false,
+            name: null,
+            lastName: null,
+            phone: null,
+            address: null,
+            notes: null,
+            email: null,
+            errors: []
         }
     },
     mounted() {
@@ -145,15 +169,40 @@ export default {
                     console.log(error)
                 })
         },
-        postCustomer() {
-            axios
-                .post('/api/v1/customers/')
-                .then(response => {
-                    console.log(response.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+        insertCustomer() {
+            this.errors = []
+            if (this.name === '') {
+                this.errors.push('Il nome è obbligatorio')
+            }
+            if (this.lastName === '') {
+                this.errors.push('Il cognome è obbligatorio')
+            }
+            if (!this.errors.length) {
+                const formData = {
+                    name: this.name,
+                    last_name: this.lastName,
+                    phone: this.phone,
+                    address: this.address,
+                    notes: this.notes,
+                    email: this.email
+                }
+                axios
+                    .post("/api/v1/customers/", formData)
+                    .then(response => {
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        if (error.response) {
+                            for (const property in error.response.data) {
+                                this.errors.push(`${property}: ${error.response.data[property]}`)
+                            }
+                            console.log(JSON.stringify(error.response.data))
+                        } else if (error.message) {
+                            this.errors.push('Qualcosa è andato storto. Perfavore riprova di nuovo.')
+                            console.log(JSON.stringify(error))
+                        }
+                    })
+            }
         },
         highlightMatches(text) {
             const textToString = text.toString();
@@ -161,7 +210,13 @@ export default {
             if (!matchExists) return textToString;
             const re = new RegExp(this.filter, "ig");
             return textToString.replace(re, matchedText => `<strong>${matchedText}</strong>`);
-        }
+        },
+        isValidEmail() {
+            return /^[^@]+@\w+(\.\w+)+\w$/.test(this.email);
+        },
+        isValidPhone() {
+            return /^\d{10}$/.test(this.phone);
+        },
     },
 }
 </script>
