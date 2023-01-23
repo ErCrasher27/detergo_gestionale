@@ -27,8 +27,7 @@
                             <td v-html="highlightMatches(row.id)"></td>
                             <td v-html="highlightMatches(row.name)"></td>
                             <td v-html="highlightMatches(row.last_name)"></td>
-                            <td v-if="row.phone != null" v-html="highlightMatches(row.phone)"></td>
-                            <td v-else v-html="highlightMatches('//')"></td>
+                            <td v-html="highlightMatches(row.phone)"></td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -168,9 +167,10 @@ export default {
                 const id = row.id.toString().toLowerCase();
                 const name = row.name.toLowerCase();
                 const lastName = row.last_name.toLowerCase();
+                const phone = row.phone.toLowerCase();
                 const searchTerm = this.filter.toLowerCase();
                 return (
-                    id.includes(searchTerm) || name.includes(searchTerm) || lastName.includes(searchTerm)
+                    id.includes(searchTerm) || name.includes(searchTerm) || lastName.includes(searchTerm) || phone.includes(searchTerm)
                 );
             });
         }
@@ -193,6 +193,9 @@ export default {
             }
             if (this.lastName === '') {
                 this.errors.push('Il cognome è obbligatorio')
+            }
+            if (this.phone === '') {
+                this.errors.push('Il numero di telefono è obbligatorio')
             }
             if (!this.errors.length) {
                 const formData = {

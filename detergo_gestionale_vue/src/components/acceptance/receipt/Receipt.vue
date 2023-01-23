@@ -14,7 +14,7 @@
                 <th>Tot. Euro: 30</th>
             </tr>
             <tr>
-                <th>{{ $store.state.customer[0].name }}</th>
+                <th>{{ }}</th>
                 <th>Data restituzione: 12/01/2005</th>
                 <th>Note: questo scontrino è urgente perchè il cliente deve andare ad una cerimonia</th>
             </tr>
